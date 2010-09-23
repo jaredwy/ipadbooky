@@ -1,8 +1,8 @@
-(function() {
+var meetingRooms = (function() {
     var scope = "https://www.google.com/calendar/feeds/",
     feed = "https://www.google.com/calendar/feeds/default/allcalendars/full",
     calendarService,
-    token, time = 1;
+    token, time = 1, listOfCal = [];
     
     google.load("gdata", "2.x", {
         packages: ["calendar"]
@@ -40,12 +40,18 @@
         for (var i = 0, ii = entries.length; i < ii; i++) {
             summary = entries[i].getSummary();
             if(summary && summary.getText().match(/-meeting room/)) {
-                console.log(entries[i].getTitle().getText());
+                listOfCal.push({title: entries[i].getTitle().getText(), calandar: entries[i]});
+                addCal(entries[i].getTitle().getText());
             }
         }
+        
+        
+        
+        
 
     };
 
     google.setOnLoadCallback(init);
+    
 })();
 
