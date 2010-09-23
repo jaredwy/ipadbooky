@@ -1,0 +1,10 @@
+#cal-list ul{
+    width: 30%;
+}
+
+#info {
+    float: right;
+    overflow: hidden;
+    margin-left: 20%;
+    width: 48%;
+}
