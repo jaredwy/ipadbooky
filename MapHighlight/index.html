@@ -5,6 +5,33 @@
 
 	<style type="text/css" media="screen">
 		#holder { height: 1000px; width: 1000px; }
+		input { 
+			-webkit-border-radius: 8px;
+			height: 30px;
+			width: 150px;
+			border: solid #D6D6D6;
+			color: #777;
+			font-family: 'Lucida Grande', Arial, sans-serif;
+			font-size: 15px;
+			margin-left: 15px;
+		}
+		label {
+			color: #666;
+			float: left;
+			font: normal 15px 'Lucida Grande';
+			margin-top: 10px;
+			text-align: right;
+			text-transform: capitalize;
+			vertical-align: middle;
+			width: 110px;
+		}
+		
+		#bookingForm {
+			/*display: none; */
+		}
+		.form-item {
+			margin-bottom: 10px;
+		}
 	</style>
 
 <script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/blob/master/raphael.js?raw=true"></script>			
@@ -42,5 +69,21 @@
 	<div id="holder">
 		<img id="plan" src="plan.jpg" width="800" height="800" /> 
 	</div>
+	<div id="bookingForm">
+		<form> 
+			<div class="form-item">
+				<label for="meetingTitle">Meeting Title </label>
+				<input type="text" name="meetingTitle" id="meetingTitle" />
+			</div>
+			<div class="form-item">
+				<label for="meetingTime">Meeting Time </label>
+				<input type="datetime" name="meetingTime" id="meetingTime" />
+			</div>
+			<div class="buttons">
+				<input type="submit" >
+			</div>
+		</form>
+	</div>
+	
 </body>
 </html> 
