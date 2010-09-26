@@ -1,10 +1,81 @@
-#cal-list ul{
+body {
+        font: 1em "Lucida Grande";
+}
+h1 {
+    text-shadow: rgba(255,255,255,.2) 0 1px 1px;
+    color: rgb(76, 86, 108);
+}
+
+.toolbar {
+    height: 45px;
+    position: relative;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.496094) 0px 1px 2px;
+    background-image:-webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.2, rgb(194,194,194)),
+        color-stop(1, rgb(214,214,214)),
+        color-stop(0.99, rgb(242,242,242))
+    )
+}
+
+.toolbar > h1 {
+    position: absolute;
+    overflow: hidden;
+    left: 50%;
+    top: 10px;
+    line-height: 1em;
+    margin: 1px 0 0 -75px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    color: #000;
+}
+
+#cal-list {
     width: 30%;
+    float: left;
+    overflow: hidden;
+}
+
+#cal-list ul.rounded{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: #F2F2F2;
+}
+#cal-list ul li{
+   height: 30px;
+   padding-top: 5px;
+   border-top: 1px solid #EBEBEB;
+   padding-left: 20px;
 }
 
 #info {
     float: right;
     overflow: hidden;
-    margin-left: 20%;
-    width: 48%;
+    width: 65%;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+
+.button {
+    color: white;
+    width: 60px;
+    height: 20px;
+    text-align: center; 
+    padding-top: 3px;
+    -webkit-border-radius: 5px;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.42, rgb(47,48,43)),
+        color-stop(0.3, rgb(48,54,54)),
+        color-stop(0.8, rgb(77,81,81))
+    );
 }

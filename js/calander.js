@@ -79,6 +79,20 @@ var meetingRooms = (function() {
             callback(!!root.feed.getEntries().length);
         });
     };
+    
+    var nextFree = function(calanderTitle,callback) {
+        var now = Date.today();
+        loadEventForCalander(calanderTitle,now,now.set({ hour: 24, minute: 00 }), function(root) {
+            if(root.feed.getEntries().length) {
+                
+            }
+            else {
+                callback("Room free till end of day");
+            }
+        });
+        )
+    };
+    
     google.setOnLoadCallback(init);
 
     return {
@@ -87,6 +101,9 @@ var meetingRooms = (function() {
         },
         isBooked: function(calanderTitle,dateFrom,dateTo,callback) {
             doesHaveEvent(calanderTitle,dateFrom,dateTo,callback);
+        },
+        getNextFree: function(calanderTitle,dateFrom,dateTo,callback) {
+            
         }
     };
 
