@@ -52,13 +52,13 @@ h1 {
    padding-top: 5px;
    border-top: 1px solid #EBEBEB;
    padding-left: 20px;
+   cursor: pointer;
 }
 
 #info {
     float: right;
     overflow: hidden;
     width: 65%;
-    padding: 10px;
     border: 1px solid black;
 }
 

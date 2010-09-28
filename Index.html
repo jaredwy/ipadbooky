@@ -5,17 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 	<title>Index</title>
-	
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/black-tie/jquery-ui.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="css/app.css" type="text/css" media="screen" title="no title" charset="utf-8">
     <script src="js/date.js" type="text/javascript" charset="utf-8"></script>
 	<script src="http://code.jquery.com/jquery-1.4.2.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/jqtouch.js" type="text/javascript" charset="utf-8"></script> 
     <script src="js/jqtouch.transitions.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAR4dJSBii5YOC7_avESB3UhTuO57DYOxXDM_yRCLz5JkCrp_j0RScsvyjMQuCC7LGH9kghWjYpQR8ig"></script>
-    <script src="js/calander.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/view.js" type="text/javascript" charset="utf-8"></script>
-
+    <!-- <script src="js/calander.js" type="text/javascript" charset="utf-8"></script> -->
+    <script src="js/view.js" type="text/javascript" charset="utf-8"></script>  
     
+<script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/blob/master/raphael.js?raw=true"></script>	
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/overlay.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/meetingrooms.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
 
 <body>
@@ -23,17 +27,28 @@
       <div class="toolbar"><h1>Meeting rooms</h1></div>
           <div id="cal-list">
               <ul class="rounded"> 
-				<li class="arrow"> meeting rooms 1 </li>
-				<li class="arrow"> meeting rooms 2 </li>
-				<li class="arrow"> meeting rooms 3 </li>
+				<li class="arrow"> meeting room 1 </li>
+				<li class="arrow"> meeting room 2 </li>
+				<li class="arrow"> meeting room 3 </li>
               </ul>
           </div>
           <div id="info">
-            <div class="used"> in use </div>
-			<div class="countdown"> 10 mins remaining </div>
-			<div class="free"> free in 30 mins for 4 hours </div>
-			<div class="button"> book </div>
+            <img id="plan" src="MapHighlight/plan.jpg" width="800" height="800" /> </div>
           </div>
     </div>
+	<div id="bookingForm" style="display:none">
+		<form> 
+			<div class="form-item">
+				<label for="meetingTitle">Meeting Title </label>
+				<input type="text" name="meetingTitle" id="meetingTitle" />
+			</div>
+			<div class="form-item">
+				<label for="meetingTime">Meeting Time </label>
+				<input type="datetime" name="meetingTime" id="meetingTime" />
+			</div>
+		</form>
+	</div>
+
+
 </body>
 </html>

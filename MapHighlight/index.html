@@ -45,10 +45,7 @@
 	$(document).ready(function() {
 		$("#clickMe").click(function(e){
 			e.preventDefault();
-			var meetingRoom = meetings[0];
-			meetingRoom.drawnRoom.animate({scale: "1.1,1.1"},1000, function(){
-				this.animate({scale: "1.0,1.0"}, 1000);
-			});
+
 			
 		
 			return false;
