@@ -21,7 +21,9 @@ $(document).ready(function() {
   		})(meetings[i]);
 	}
 
-	$("#cal-list ul li").click(function(e) {
+	$("#cal-list ul li").click(function() {
+	    showBookingForm(findRoom(jQuery.trim($(this).text())));
+	}).mouseover(function(e) {
     	var meetingRoom = findRoom(jQuery.trim($(this).text()));
     	if(meetingRoom) {
     	    meetingRoom.drawnRoom.animate({scale: "1.1,1.1"},1000, function(){
