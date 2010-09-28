@@ -33,13 +33,47 @@
 			margin-bottom: 10px;
 		}
 	</style>
-
-<script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/blob/master/raphael.js?raw=true"></script>			
+<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/themes/black-tie/jquery-ui.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<script type="text/javascript" src="http://github.com/DmitryBaranovskiy/raphael/blob/master/raphael.js?raw=true"></script>		
+	
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" src="meetingrooms.js"></script>
 <script type="text/javascript" src="bookRoom.js"></script>		
 <script type="text/javascript">
-	function rar() {		
+
+	$(document).ready(function() {
+		$("#clickMe").click(function(e){
+			e.preventDefault();
+			var meetingRoom = meetings[0];
+			meetingRoom.drawnRoom.animate({scale: "1.1,1.1"},1000, function(){
+				this.animate({scale: "1.0,1.0"}, 1000);
+			});
+			
+		
+			return false;
+		});
+		
+		$( "#bookingForm" ).dialog({
+					autoOpen: false,
+					height: 300,
+					width: 350,
+					modal: true,
+					buttons: {
+						Book: function() {
+								alert('hello');
+							},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+						}
+					},
+					close: function() {
+					}
+		});
+		
+	});
+
+	function init() {		
 		var bookedColour = "#bf0000",
 		emptyColour = "#26bf00",
 	    img = document.getElementById("plan"),
@@ -50,8 +84,9 @@
 	    r.image(img.src, 0, 0, 800, 800);	    
 		for(var i = 0,length = meetings.length; i < length; i++){
 		 	(function(currentRoom) {
+				currentRoom["test"] = 100;
 				fillValue = currentRoom.isBooked ? bookedColour : emptyColour;
-				r.path(currentRoom.path)
+				currentRoom["drawnRoom"] = r.path(currentRoom.path)
 				.attr({stroke: fillValue, fill: fillValue, "fill-opacity": normalOpacity })
 				.mouseover(function () {
 	       			this.animate({"fill-opacity": overOpacity}, 700) 
@@ -61,15 +96,14 @@
       		})(meetings[i]);
 		}
 	};
-
-	debugger;
+	
 </script>
 </head>
-<body onload="rar()">
+<body onload="init()">
 	<div id="holder">
 		<img id="plan" src="plan.jpg" width="800" height="800" /> 
 	</div>
-	<div id="bookingForm">
+	<div id="bookingForm" style="display:none">
 		<form> 
 			<div class="form-item">
 				<label for="meetingTitle">Meeting Title </label>
@@ -78,9 +112,6 @@
 			<div class="form-item">
 				<label for="meetingTime">Meeting Time </label>
 				<input type="datetime" name="meetingTime" id="meetingTime" />
-			</div>
-			<div class="buttons">
-				<input type="submit" >
 			</div>
 		</form>
 	</div>

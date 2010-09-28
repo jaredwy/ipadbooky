@@ -1,3 +1,4 @@
 function showBookingForm(meeting) { 
-	alert(meeting.name);
+		$( "#bookingForm" ).dialog('open');
 }
+

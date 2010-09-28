@@ -79,3 +79,33 @@ h1 {
         color-stop(0.8, rgb(77,81,81))
     );
 }
+
+
+#holder { height: 1000px; width: 1000px; }
+input { 
+	-webkit-border-radius: 8px;
+	height: 30px;
+	width: 150px;
+	border: solid #D6D6D6;
+	color: #777;
+	font-family: 'Lucida Grande', Arial, sans-serif;
+	font-size: 15px;
+	margin-left: 15px;
+}
+label {
+	color: #666;
+	float: left;
+	font: normal 15px 'Lucida Grande';
+	margin-top: 10px;
+	text-align: right;
+	text-transform: capitalize;
+	vertical-align: middle;
+	width: 110px;
+}
+
+#bookingForm {
+	/*display: none; */
+}
+.form-item {
+	margin-bottom: 10px;
+}
