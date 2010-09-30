@@ -1,4 +1,4 @@
-var meetingRooms = (function() {
+var bookRooms = (function() {
     var scope = "https://www.google.com/calendar/feeds/",
     feed = "https://www.google.com/calendar/feeds/default/allcalendars/full",
     calendarService,
@@ -33,7 +33,6 @@ var meetingRooms = (function() {
 
     var processAfterLogin = function() {
         calendarService = new google.gdata.calendar.CalendarService('Atlassian-IpadMeetingRoom');
-        calendarService.getAllCalendarsFeed(feed, loadCalendars, handleError);
     };
 
     var handleError = function(error) {
@@ -41,19 +40,22 @@ var meetingRooms = (function() {
         console.error(error.cause ? error.cause.statusText: error.message);
     };
 
-    var loadCalendars = function(result) {
-        entries = result.feed.entry;
-        var summary;
-        for (var i = 0, ii = entries.length; i < ii; i++) {
-            summary = entries[i].getSummary();
-            if (summary && summary.getText().match(/-meeting room/)) {
-                listOfCal.push({
-                    title: entries[i].getTitle().getText(),
-                    calandar: entries[i]
-                });
-                addCal(entries[i].getTitle().getText());
+    var loadCalendars = function(callback) {
+        calendarService = new google.gdata.calendar.CalendarService('Atlassian-IpadMeetingRoom');
+        calendarService.getAllCalendarsFeed(feed, function(result){
+            entries = result.feed.entry;
+            var summary;
+            for (var i = 0, ii = entries.length; i < ii; i++) {
+                summary = entries[i].getSummary();
+                if (summary && summary.getText().match(/-meeting room/)) {
+                    listOfCal.push({
+                        title: entries[i].getTitle().getText(),
+                        calandar: entries[i]
+                    });
+                }
             }
-        }
+            callback(listOfCal); 
+        }, function(result) { callback("error")});
     };
     
     var getCalanderForTitle = function(title) {
@@ -62,21 +64,27 @@ var meetingRooms = (function() {
           }
           return "";
     };
-    loadEventForCalander : function(calanderTitle,dateFrom,dateTo,callback) {
+   var loadEventForCalander  = function(calanderTitle,dateFrom,dateTo,callback) {
             var query = feed,
             calander = getCalanderForTitle(calanderTitle);
             if(dateFrom) {
                 query = new google.gdata.calendar.CalendarEventQuery(feed);
                 var min = google.gdata.DateTime.fromIso8601(dateFrom.toISOString()),
                 max = google.gdata.DateTime.fromIso8601(dateFrom.toISOString());
-                when.setMinimumStartTime(min);
-                when.setMaximumStartTime(max);
+                query.setMinimumStartTime(min);
+                query.setMaximumStartTime(max);
             }
             calendarService.getEventsFeed(query,callback, handleError);
     }
     var doesHaveEvent = function(calanderTitle,dateFrom,dateTo,callback){
         loadEventForCalander(calanderTitle,dateFrom,dateTo,function(root) {
-            callback(!!root.feed.getEntries().length);
+            for (var i = 0; i < root.feed.entry.length; i++ ) {
+                var eventEntry = entries[i];
+                var eventTitle = eventEntry.getTitle().getText();
+                if(eventTitle == calanderTitle) {
+                    eventEntry
+                }
+            }
         });
     };
     
@@ -90,12 +98,16 @@ var meetingRooms = (function() {
                 callback("Room free till end of day");
             }
         });
-        )
     };
+    var bookRoom = function(calanderTitle,dateFrom,dateTo) {
+        alert('booked');
+    }
     
     google.setOnLoadCallback(init);
-
     return {
+        getAllMeetingRooms : function(callback) {
+            loadCalendars(callback);
+        },
         getBookings: function(calanderTitle,dateFrom,dateTo,callback) {
             loadEventForCalander(calanderTitle,dateFrom,dateTo,callback);
         },
@@ -103,7 +115,10 @@ var meetingRooms = (function() {
             doesHaveEvent(calanderTitle,dateFrom,dateTo,callback);
         },
         getNextFree: function(calanderTitle,dateFrom,dateTo,callback) {
-            
+            alert('hello world');
+        },
+        bookRoom: function(calanderTitle,dateFrom,dateTo) {
+            bookRoom(calanderTitle,dateFrom,dateTo);
         }
     };
 
